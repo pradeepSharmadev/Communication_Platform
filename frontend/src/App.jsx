@@ -10,18 +10,22 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import PageNotFound from "./components/PageNotFound";
 import { AuthProvider } from "./pages/auth/authContext";
+import PageLoader from "./components/PageLoader";
 
 const Home = lazy(() => import("./pages/Landing/Home"));
 const Login = lazy(() => import("./components/auth/Login"));
 const Register = lazy(() => import("./components/auth/Register"));
-const DashboardLayout = lazy(() => import("./pages/service/DashboardLayout"));
-const Dashboard = lazy(() => import("./pages/service/Dashboard"));
-const Profile = lazy(() => import("./pages/service/Profile"));
+const DashboardLayout = lazy(() => import("./pages/features/DashboardLayout"));
+const Dashboard = lazy(() => import("./pages/features/Dashboard"));
+const ConversationDashboard = lazy(
+  () => import("./pages/features/ConversationDashboard"),
+);
+const Profile = lazy(() => import("./pages/features/Profile"));
 
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PageLoader />}>
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -32,7 +36,7 @@ function App() {
             {/* secure route */}
             <Route element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<ConversationDashboard />} />
                 <Route path="/dashboard/profile" element={<Profile />} />
               </Route>
             </Route>
