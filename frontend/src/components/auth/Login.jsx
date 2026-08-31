@@ -1,112 +1,169 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../pages/auth/authContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
+
+    // call backend
+    // const response = await fetch("/api/auth/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   credentials: "include",
+    //   body: JSON.stringify({
+    //     email,
+    //     password,
+    //   }),
+    // });
+
+    // if (!response.ok) {
+    //   // Show login error
+    //   return;
+    // }
+
+    // const data = await response.json();
+
+    // login(data.user);
+    login({ name: "Pradeep", email: "test@gmail.com", id: "abcID" });
+
+    // Return user to the page they originally requested
+    const from = location.state?.from?.pathname || "/dashboard";
+
+    navigate(from, { replace: true });
+  };
+
   return (
-    <section className="flex h-screen items-center text-(--text-main) justify-center  selection:bg-indigo-100 selection:text-indigo-900">
-      <main className="max-w-md">
-        {/* card */}
-        <div className="border rounded-3xl p-8 sm:p-10 flex flex-col gap-4">
-          {/* Header/Brand */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="w-12 h-12 rounded-xl border flex items-center justify-center">
-              {/* inner subtle */}
-              <div className="absolute inset-0 rounded-2xl pointer-events-none"></div>
+    <section className="flex min-h-screen items-center justify-center bg-background px-4 text-foreground selection:bg-primary/20 selection:text-primary">
+      <main className="w-full max-w-md">
+        <div className="flex flex-col gap-6 rounded-xl border border-border bg-surface p-8 sm:p-10">
+          {/* Header / Brand */}
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-surface-elevated">
               <span
-                className="material-symbols-outlined text-4xl text-(--accent-purple)"
+                className="material-symbols-outlined text-3xl text-primary"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 hub
               </span>
             </div>
+
             <div className="text-center">
-              <h1 className="font-medium text-2xl sora text-(--text-main) tracking-tight">
+              <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
                 Connect
               </h1>
-              <p className="text-sm mt-2">Welcome back. Enter your details.</p>
+
+              <p className="mt-2 text-sm text-muted">
+                Welcome back. Enter your details.
+              </p>
             </div>
           </div>
+
           {/* Social Login */}
-          <div className="flex flex-col gap-2">
-            <button className="w-full flex items-center justify-center gap-2 border rounded-xl border-(--text-muted) py-3 px-4 transition-all duration-200 active:scale-[0.98] group">
-              <span className="material-symbols-outlined text-(--text-muted) text-xl">
-                code
-              </span>
-              <span className="font-medium text-xs text-(--text-main) uppercase tracking-tight">
-                Continue with Google
-              </span>
-            </button>
-          </div>
+          <button
+            type="button"
+            className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-surface-elevated px-4 py-3 transition-colors hover:border-outline hover:bg-surface-variant active:scale-[0.98]"
+          >
+            <span className="material-symbols-outlined text-xl text-muted">
+              code
+            </span>
+
+            <span className="text-xs font-medium uppercase tracking-tight text-foreground">
+              Continue with Google
+            </span>
+          </button>
+
           {/* Divider */}
-          <div className="flex items-center gap-4 w-full">
-            <div className="h-px flex-1 border border-(--border-color)"></div>
-            <span className="font-medium text-sm uppercase tracking-tight text-(--text-muted)">
+          <div className="flex w-full items-center gap-4">
+            <div className="h-px flex-1 bg-border" />
+
+            <span className="text-xs font-medium uppercase tracking-tight text-muted">
               Or
             </span>
-            <div className="h-px flex-1 border border-(--border-color)"></div>
+
+            <div className="h-px flex-1 bg-border" />
           </div>
-          {/* Email Password Form */}
+
+          {/* Email / Password Form */}
           <form className="flex flex-col gap-5">
             <div className="flex flex-col gap-4">
-              <div className="relative group">
-                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-(--text-muted) group-focus-within:text-(--text-muted) transition-colors">
+              {/* Email */}
+              <div className="group relative">
+                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-xl text-muted transition-colors group-focus-within:text-primary">
                   mail
                 </span>
+
                 <input
-                  className="w-full border rounded-xl py-3 pl-12 pr-4 text-(--text-muted) placeholder:text-(--text-muted)/50 focus:border-(--text-main) focus:ring-0  focus:outline-none transition-all text-md"
-                  placeholder="Email address"
                   type="email"
+                  placeholder="Email address"
+                  className="w-full rounded-lg border border-border bg-background py-3 pl-12 pr-4 text-base text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-primary"
                 />
               </div>
-              <div className="relative group">
-                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-(--text-muted) group-focus-within:text-(--text-muted) transition-colors">
+
+              {/* Password */}
+              <div className="group relative">
+                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-xl text-muted transition-colors group-focus-within:text-primary">
                   lock
                 </span>
+
                 <input
-                  className="w-full border rounded-xl py-3 pl-12 pr-4 text-(--text-muted) placeholder:text-(--text-muted)/50 focus:border-(--text-main) focus:ring-0  focus:outline-none transition-all text-md"
-                  placeholder="Password"
                   type="password"
+                  placeholder="Password"
+                  className="w-full rounded-lg border border-border bg-background py-3 pl-12 pr-4 text-base text-foreground outline-none transition-colors placeholder:text-muted/50 focus:border-primary"
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between mt-0.5">
-              <label className="flex items-center gap-2 cursor-pointer group">
+
+            {/* Remember / Forgot */}
+            <div className="flex items-center justify-between">
+              <label className="group flex cursor-pointer items-center gap-2">
                 <div className="relative flex items-center justify-center">
                   <input
-                    className="peer appearance-none w-4 h-4 border border-(--text-muted) rounded checked:bg-none checked:border-(--text-muted) transition-colors cursor-pointer"
                     type="checkbox"
+                    className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-outline bg-background checked:border-primary checked:bg-primary"
                   />
-                  <span
-                    className="material-symbols-outlined absolute text-[10px] text-(--text-muted) opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
+
+                  <span className="material-symbols-outlined pointer-events-none absolute text-[11px] font-bold text-background opacity-0 peer-checked:opacity-100">
                     check
                   </span>
                 </div>
-                <span className="font-medium text-[12px] text-(--text-main) group-hover:text-(--text-main)">
+
+                <span className="text-xs font-medium text-muted transition-colors group-hover:text-foreground">
                   Remember me
                 </span>
               </label>
+
               <a
-                className="text-[12px] text-(--text-main) hover:underline underline-offset-4"
                 href="#"
+                className="text-xs font-medium text-primary hover:underline"
               >
                 Forgot password?
               </a>
             </div>
+
+            {/* Submit */}
             <button
-              className="w-full bg-(--accent-purple)/50 font-bold text-sm uppercase tracking-wider rounded-xl py-4 mt-2 transition-all duration-200 active:scale-[0.98] border border-(--border-color)"
               type="submit"
+              onClick={handleLogin}
+              className="mt-1 w-full rounded-lg bg-primary py-3.5 text-sm font-bold uppercase tracking-wider text-background transition-all hover:brightness-110 active:scale-[0.98]"
             >
               Sign In
             </button>
           </form>
-          {/* footer */}
-          <p className="text-center text-[12px] mt-2">
+
+          {/* Footer */}
+          <p className="text-center text-xs text-muted">
             Don't have an account?{" "}
-            <a
-              className=" text-blue-600 font-medium transition-colors hover:underline underline-offset-4"
-              href="#"
-            >
+            <a href="#" className="font-medium text-primary hover:underline">
               Sign up
             </a>
           </p>
