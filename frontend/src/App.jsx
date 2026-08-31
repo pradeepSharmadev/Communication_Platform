@@ -9,7 +9,7 @@ import {
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import PageNotFound from "./components/PageNotFound";
-import { AuthProvider } from "./pages/auth/authContext";
+import { AuthProvider } from "./pages/auth/AuthContext";
 import PageLoader from "./components/PageLoader";
 
 const Home = lazy(() => import("./pages/Landing/Home"));

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../pages/auth/authContext";
+import { useAuth } from "../../pages/auth/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();

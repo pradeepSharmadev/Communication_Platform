@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from "../auth/authContext";
+import { useAuth } from "../auth/AuthContext";
 
 const DashboardNav = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const DashboardNav = () => {
   );
 };
 
-const DashboardLayout = ()=>{
+const DashboardLayout = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <DashboardNav />
@@ -50,5 +50,5 @@ const DashboardLayout = ()=>{
       </main>
     </div>
   );
-}
+};
 export default DashboardLayout;
