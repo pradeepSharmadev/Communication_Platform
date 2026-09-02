@@ -68,39 +68,53 @@ const statusStyles = {
     color: "bg-secondary",
     glow: "shadow-[0_0_7px_rgba(0,181,148,0.7)]",
   },
-  busy: { color: "bg-tertiary", glow: "shadow-[0_0_7px_rgba(254,177,39,0.5)]" },
-  offline: { color: "bg-surface-variant", glow: "" },
+  busy: {
+    color: "bg-tertiary",
+    glow: "shadow-[0_0_7px_rgba(254,177,39,0.5)]",
+  },
+  offline: {
+    color: "bg-surface-variant",
+    glow: "",
+  },
 };
 
-const Conversation = () => {
+const Conversation = ({ selectedConversation, onSelectConversation }) => {
   return (
     <section className="z-30 flex h-full w-full flex-col border-r border-border bg-surface/70 backdrop-blur-xl md:w-90">
       {/* Search */}
       <div className="border-b border-border p-4">
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-lg text-muted">
-            search
-          </span>
           <input
             type="text"
             placeholder="Search conversations..."
-            className="h-10 w-full rounded-lg border border-border bg-surface-elevated/70 pl-10 pr-4 font-sans text-sm text-foreground outline-none placeholder:text-outline transition-all duration-200 focus:border-primary/40 focus:bg-surface-elevated focus:ring-1 focus:ring-primary/30"
+            className="h-10 w-full rounded-lg border border-border bg-surface-elevated/70 pl-4 pr-4 font-sans text-sm text-foreground outline-none placeholder:text-outline transition-all duration-200 focus:border-primary/40 focus:bg-surface-elevated focus:ring-1 focus:ring-primary/30"
           />
         </div>
       </div>
+
       {/* Conversations */}
-      <div className="custom-scrollbar flex-1 space-y-1.5 overflow-y-auto p-3">
+      <div className="chat-scrollbar flex-1 space-y-1.5 overflow-y-auto p-3">
         {conversations.map((conversation) => {
           const status = statusStyles[conversation.status];
+
+          const isSelected = selectedConversation?.id === conversation.id;
+
           return (
-            <div
+            <button
+              type="button"
               key={conversation.id}
-              className={`group relative flex cursor-pointer items-start gap-3 rounded-lg border p-3 transition-all duration-200 active:scale-[0.99] ${conversation.id === 1 ? "border-primary/10 bg-primary/5 hover:border-primary/20 hover:bg-primary/10" : "border-transparent hover:border-border hover:bg-glass"}`}
+              onClick={() => onSelectConversation(conversation)}
+              className={`group relative flex w-full cursor-pointer items-start gap-3 rounded-lg border p-3 text-left transition-all duration-200 active:scale-[0.99] ${
+                isSelected
+                  ? "border-primary/10 bg-primary/5 hover:border-primary/20 hover:bg-primary/10"
+                  : "border-transparent hover:border-border hover:bg-glass"
+              }`}
             >
               {/* Active indicator */}
-              {conversation.id === 1 && (
+              {isSelected && (
                 <div className="absolute left-0 top-1/2 h-8 w-0.5 -translate-y-1/2 rounded-r-full bg-primary shadow-[0_0_10px_rgba(0,209,255,0.7)]" />
               )}
+
               {/* Avatar */}
               <div className="relative ml-1 shrink-0">
                 {conversation.avatar ? (
@@ -114,25 +128,35 @@ const Conversation = () => {
                     {conversation.initials}
                   </div>
                 )}
+
                 {/* Presence */}
                 <div
                   className={`absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-surface ${status.color} ${status.glow}`}
                 />
               </div>
+
               {/* Conversation Content */}
               <div className="min-w-0 flex-1">
                 <div className="mb-1 flex items-baseline justify-between gap-2">
                   <h3
-                    className={`truncate pr-2 font-sans text-sm ${conversation.id === 1 ? "font-semibold text-foreground" : "font-medium text-foreground"}`}
+                    className={`truncate pr-2 font-sans text-sm ${
+                      isSelected
+                        ? "font-semibold text-foreground"
+                        : "font-medium text-foreground"
+                    }`}
                   >
                     {conversation.name}
                   </h3>
+
                   <span
-                    className={`shrink-0 font-mono text-xs ${conversation.id === 1 ? "text-primary" : "text-outline"}`}
+                    className={`shrink-0 font-mono text-xs ${
+                      isSelected ? "text-primary" : "text-outline"
+                    }`}
                   >
                     {conversation.time}
                   </span>
                 </div>
+
                 {/* Typing */}
                 {conversation.typing ? (
                   <div className="flex items-center gap-2">
@@ -151,6 +175,7 @@ const Conversation = () => {
                     <p className="min-w-0 flex-1 truncate font-sans text-sm leading-5 text-muted">
                       {conversation.message}
                     </p>
+
                     {/* Unread count */}
                     {conversation.unread > 0 && (
                       <span className="flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-primary px-1.5 font-mono text-[10px] font-semibold text-background shadow-[0_0_8px_rgba(0,209,255,0.25)]">
@@ -160,7 +185,7 @@ const Conversation = () => {
                   </div>
                 )}
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

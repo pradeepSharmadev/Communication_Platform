@@ -110,3 +110,48 @@ body {
 .typing-dot:nth-child(3) {
   animation-delay: 0.3s;
 }
+
+
+/* Chat scrollbar */
+.chat-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 209, 255, 0.35) transparent;
+}
+
+.chat-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(0, 209, 255, 0.3);
+  transition: background 0.2s ease;
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 209, 255, 0.65);
+  box-shadow: 0 0 8px rgba(0, 209, 255, 0.35);
+}
+
+/* Textarea scrollbar */
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 209, 255, 0.3) transparent;
+}
+
+textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(0, 209, 255, 0.3);
+}

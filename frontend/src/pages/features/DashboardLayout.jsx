@@ -42,10 +42,10 @@ const DashboardNav = () => {
 
 const DashboardLayout = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div>
       <DashboardNav />
 
-      <main className="p-6">
+      <main >
         <Outlet />
       </main>
     </div>

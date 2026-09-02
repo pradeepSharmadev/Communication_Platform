@@ -35,10 +35,8 @@ function App() {
 
             {/* secure route */}
             <Route element={<ProtectedRoute />}>
-              <Route element={<DashboardLayout />}>
-                <Route path="/dashboard" element={<ConversationDashboard />} />
-                <Route path="/dashboard/profile" element={<Profile />} />
-              </Route>
+              <Route path="/dashboard" element={<ConversationDashboard />} />
+              <Route path="/dashboard/profile" element={<Profile />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/404" replace />} />
