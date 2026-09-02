@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const conversations = [
   {
@@ -79,6 +80,11 @@ const statusStyles = {
 };
 
 const Conversation = ({ selectedConversation, onSelectConversation }) => {
+  const navigate = useNavigate();
+  function handleConversationClick(conversation) {
+    onSelectConversation(conversation);
+    navigate(`/dashboard/${conversation.id}`);
+  }
   return (
     <section className="z-30 flex h-full w-full flex-col border-r border-border bg-surface/70 backdrop-blur-xl md:w-90">
       {/* Search */}
@@ -103,7 +109,7 @@ const Conversation = ({ selectedConversation, onSelectConversation }) => {
             <button
               type="button"
               key={conversation.id}
-              onClick={() => onSelectConversation(conversation)}
+              onClick={() => handleConversationClick(conversation)}
               className={`group relative flex w-full cursor-pointer items-start gap-3 rounded-lg border p-3 text-left transition-all duration-200 active:scale-[0.99] ${
                 isSelected
                   ? "border-primary/10 bg-primary/5 hover:border-primary/20 hover:bg-primary/10"

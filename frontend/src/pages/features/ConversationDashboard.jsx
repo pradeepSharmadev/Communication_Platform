@@ -4,10 +4,14 @@ import Profile from "../../components/features/Profile";
 import Conversation from "../../components/features/Conversation";
 import MessageEmpty from "../../components/features/MessageEmpty";
 import OpenChatMessage from "./../../components/features/OpenChatMessage";
+import { useParams } from "react-router-dom";
 
 const ConversationDashboard = () => {
+  const { userId } = useParams();
   const [message, setMessage] = useState(true);
   const [selectedConversation, setSelectedConversation] = useState(null);
+
+  console.log("Opened conversation:", userId);
 
   return (
     <section className="bg-background text-foreground selection:bg-primary/20 selection:text-primary h-screen overflow-hidden flex antialiased">

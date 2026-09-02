@@ -59,7 +59,7 @@ const Login = () => {
 
             <div className="text-center">
               <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
-                Connect
+                Ripple
               </h1>
 
               <p className="mt-2 text-sm text-muted">

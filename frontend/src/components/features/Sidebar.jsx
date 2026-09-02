@@ -1,6 +1,8 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   return (
     <nav className="fixed left-0 top-0 z-50 hidden h-screen w-70 flex-col border-r border-border bg-background/80 py-6 shadow-lg shadow-primary/5 backdrop-blur-xl md:flex">
       {/* Header */}
@@ -19,7 +21,7 @@ const Sidebar = () => {
           {/* Brand */}
           <div className="min-w-0">
             <h1 className="font-display text-xl font-semibold tracking-tight text-foreground">
-              Connect
+              Ripple
             </h1>
             <div className="mt-0.5 flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(0,181,148,0.7)]" />
@@ -92,15 +94,15 @@ const Sidebar = () => {
           <span className="ml-auto h-2 w-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(254,177,39,0.7)]" />
         </a>
         {/* Settings */}
-        <a
-          href="#"
-          className="group flex items-center gap-3 rounded-lg border border-transparent px-4 py-3 text-muted transition-all duration-200 hover:border-border hover:bg-glass hover:text-foreground active:scale-[0.98]"
+        <Link
+          to="/dashboard/architecture"
+          className="group w-full flex items-center gap-3 rounded-lg border border-transparent px-4 py-3 text-muted transition-all duration-200 hover:border-border hover:bg-glass hover:text-foreground active:scale-[0.98]"
         >
           <span className="material-symbols-outlined text-[21px] transition-transform duration-200 group-hover:rotate-45">
             settings
           </span>
           <span className="font-sans text-sm font-medium"> Settings </span>
-        </a>
+        </Link>
       </div>
       {/* Footer */}
       <div className="mt-auto border-t border-border px-3 pt-4">

@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({ profile, onBack }) => {
+  const navigate = useNavigate();
+
+  const handleVideoCall = () => {
+    navigate(`/dashboard/${profile.id}/video-call`);
+  };
   return (
     <header className="fixed right-0 top-0 z-40 hidden h-16 w-[calc(100%-280px)] items-center justify-between border-b border-border bg-background/85 px-6 backdrop-blur-xl md:flex">
       {profile ? (
@@ -63,6 +69,7 @@ const Profile = ({ profile, onBack }) => {
             <button
               type="button"
               aria-label="Start video call"
+              onClick={handleVideoCall}
               className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent text-muted transition-all duration-200 hover:border-border hover:bg-glass hover:text-primary hover:shadow-[0_0_16px_rgba(0,209,255,0.08)] active:scale-95"
             >
               <span className="material-symbols-outlined text-[21px] transition-transform duration-200 group-hover:scale-105">
@@ -73,6 +80,7 @@ const Profile = ({ profile, onBack }) => {
             <button
               type="button"
               aria-label="Start voice call"
+              onClick={()=> navigate(`/dashboard/${profile.id}/audio-call`)}
               className="group flex h-10 w-10 items-center justify-center rounded-full border border-transparent text-muted transition-all duration-200 hover:border-border hover:bg-glass hover:text-primary hover:shadow-[0_0_16px_rgba(0,209,255,0.08)] active:scale-95"
             >
               <span className="material-symbols-outlined text-[21px] transition-transform duration-200 group-hover:scale-105">
