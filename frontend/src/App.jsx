@@ -54,7 +54,10 @@ function App() {
                 element={<AudioCallPage />}
               />
               <Route path="/dashboard/profile" element={<Profile />} />
-              <Route path="/dashboard/architecture" element={<ArchitectureViewPage />} />
+              <Route
+                path="/dashboard/architecture"
+                element={<ArchitectureViewPage />}
+              />
             </Route>
 
             <Route path="*" element={<Navigate to="/404" replace />} />
