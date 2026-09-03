@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ThemeToggle from "../ThemeToggle";
 
 const Profile = ({ profile, onBack }) => {
   const navigate = useNavigate();
@@ -107,6 +108,7 @@ const Profile = ({ profile, onBack }) => {
                 more_vert
               </span>
             </button>
+            <ThemeToggle />
           </div>
         </>
       ) : (
@@ -139,6 +141,7 @@ const Profile = ({ profile, onBack }) => {
                 more_vert
               </span>
             </button>
+            <ThemeToggle />
           </div>
         </>
       )}
